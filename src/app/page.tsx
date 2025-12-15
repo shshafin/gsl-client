@@ -1,11 +1,13 @@
-import { redirect } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
-// This is a Server Component that runs immediately on the server
-// and issues a 307 (Temporary) redirect to the login page.
 export default function Home() {
-  // 🛠️ Redirect all requests hitting the root path to the login page.
-  redirect("/admin/login");
-
-  // A return statement is still technically required, though redirect() throws
-  // return null;
+  return (
+    <div>
+      <h1>Welcome to My Next.js App</h1>
+      <Link href="/admin/login">
+        <Button>Go to Admin</Button>
+      </Link>
+    </div>
+  );
 }
