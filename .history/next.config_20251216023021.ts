@@ -1,8 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // 🛠️ REQUIRED for static output to the 'out' directory
   output: "export",
 
-  // Trailing slash is good practice for static exports
+  // Optional: Set trailing slash for compatibility with static exports
   trailingSlash: true,
   images: {
     remotePatterns: [
@@ -12,6 +13,7 @@ const nextConfig = {
       },
     ],
   },
+ 
 };
 
 export default nextConfig;

@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 
 // This is a Server Component that runs immediately on the server
 // and issues a 307 (Temporary) redirect to the login page.
-export default function Home() {
+export default function HomePage() {
   // 🛠️ Redirect all requests hitting the root path to the login page.
   redirect("/admin/login");
 
