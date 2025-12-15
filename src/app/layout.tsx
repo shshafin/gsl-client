@@ -8,6 +8,9 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "GSL Export Ltd.",
   description: "Premium Toy Exporter",
+  icons: {
+    icon: "/fav.png",
+  },
 };
 
 export default function RootLayout({
