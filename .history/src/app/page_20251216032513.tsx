@@ -6,7 +6,7 @@ export default function Home() {
     <div>
       <h1>Welcome to My Next.js App</h1>
       <Link href="/admin/login">
-        <Button>Go to Admin</Button>
+        <Button>Go to About Page</Button>
       </Link>
     </div>
   );
