@@ -45,7 +45,7 @@ const SidebarContent = () => {
       {/* Logo Area */}
       <div className="p-6 border-b border-gray-800">
         <h1 className="text-md font-bold tracking-wider text-center">
-          GOLDEN SON LIMITED
+          GSL EXPORT LIMITED
         </h1>
       </div>
 
