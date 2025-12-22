@@ -39,7 +39,7 @@ const FeaturedCollections = () => {
           className="md:col-span-1 lg:col-span-1 h-100 lg:h-full">
           <div className="relative h-full w-full">
             <Image
-              src="/soft-toy.png"
+              src="/soft-toy."
               alt="Soft Toy"
               fill
               className="object-cover transition-transform duration-700 group-hover:scale-110"
