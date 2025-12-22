@@ -4,10 +4,25 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  /* --- 1. GSL Brand Colors Registration --- */
+  --color-brand-blue: var(--brand-blue);
+  --color-brand-yellow: var(--brand-yellow);
+  --color-brand-red: var(--brand-red);
+  --color-brand-dark: var(--brand-dark);
+  --color-brand-light: var(--brand-light);
+
+  /* --- 2. Custom Animations Registration --- */
+  --animate-fade-in-up: fade-in-up 0.8s ease-out forwards;
+  --animate-float: float 3s ease-in-out infinite;
+
+  /* --- Existing Shadcn Mappings --- */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+
+  /* 🛠️ UPDATED FONT: Mapping to Outfit */
+  --font-sans: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono);
+
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -46,7 +61,16 @@
   --radius-4xl: calc(var(--radius) + 16px);
 }
 
+/* --- 3. Variable Definitions --- */
 :root {
+  /* 🎨 GSL BRAND PALETTE (From Logo) */
+  --brand-blue: #003399; /* Deep Royal Blue */
+  --brand-yellow: #ffd700; /* Golden Amber */
+  --brand-red: #cc0000; /* Accent Red */
+  --brand-dark: #0f172a; /* Rich Slate Text */
+  --brand-light: #f8fafc; /* Premium Background */
+
+  /* Existing Variables */
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -115,11 +139,34 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+/* --- 4. Animation Keyframes --- */
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    /* Updated to use the premium font and colors by default */
+    @apply bg-brand-light text-foreground font-sans;
   }
 }

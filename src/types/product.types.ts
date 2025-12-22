@@ -1,9 +1,7 @@
 export type TProductCategory =
-  | "Plush"
-  | "Plastic"
-  | "Educational"
-  | "Electronic"
-  | "Wooden"
+  | "Soft Toy"
+  | "Plastic Toy"
+  | "Baby Accessories"
   | "Others";
 
 export interface IProduct {

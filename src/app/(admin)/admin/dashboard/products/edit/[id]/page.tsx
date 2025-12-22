@@ -31,11 +31,9 @@ const formSchema = z.object({
 });
 
 const categories = [
-  { value: "Plush", label: "Plush" },
-  { value: "Plastic", label: "Plastic" },
-  { value: "Educational", label: "Educational" },
-  { value: "Electronic", label: "Electronic" },
-  { value: "Wooden", label: "Wooden" },
+  { value: "Soft Toy", label: "Soft Toy" },
+  { value: "Plastic Toy", label: "Plastic Toy" },
+  { value: "Baby Accessories", label: "Baby Accessories" },
   { value: "Others", label: "Others" },
 ];
 

@@ -1,13 +1,20 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Outfit } from "next/font/google"; // 👈 Changed from Inter to Outfit
 import "./globals.css";
-import { Toaster } from "sonner"; // Better toast notifications
+import { Toaster } from "sonner";
 
-const inter = Inter({ subsets: ["latin"] });
+// 1. Configure the premium font
+const outfit = Outfit({
+  subsets: ["latin"],
+  // This variable allows us to use it in Tailwind/CSS as var(--font-outfit)
+  variable: "--font-outfit",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
-  title: "GSL Export Ltd.",
-  description: "Premium Toy Exporter",
+  title: "GSL Export Ltd. | Global Toy Leader", // 👈 Improved title
+  description:
+    "Premium manufacturer and exporter of soft toys, plastic toys, and baby accessories.",
   icons: {
     icon: "/fav.png",
   },
@@ -19,12 +26,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <html
+      lang="en"
+      className="scroll-smooth">
+      {" "}
+      {/* 👈 Added smooth scrolling */}
+      <body
+        className={`${outfit.variable} antialiased bg-brand-light text-brand-dark`}>
         {children}
         <Toaster
           position="top-center"
           richColors
+          theme="light" // Force light theme for consistency
+          closeButton
         />
       </body>
     </html>

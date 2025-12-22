@@ -72,16 +72,14 @@ export default function ProductListPage() {
 
   const getCategoryColor = (cat: TProductCategory) => {
     switch (cat) {
-      case "Plush":
+      case "Soft Toy":
         return "bg-pink-100 text-pink-800 border-pink-200";
-      case "Plastic":
+      case "Plastic Toy":
         return "bg-blue-100 text-blue-800 border-blue-200";
-      case "Wooden":
-        return "bg-amber-100 text-amber-800 border-amber-200";
-      case "Electronic":
-        return "bg-purple-100 text-purple-800 border-purple-200";
-      case "Educational":
+      case "Baby Accessories":
         return "bg-green-100 text-green-800 border-green-200";
+      case "Others":
+        return "bg-gray-100 text-gray-800 border-gray-200";
       default:
         return "bg-gray-100 text-gray-800 border-gray-200";
     }
@@ -341,11 +339,9 @@ export default function ProductListPage() {
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="all">All Categories</SelectItem>
-              <SelectItem value="Plush">Plush</SelectItem>
-              <SelectItem value="Plastic">Plastic</SelectItem>
-              <SelectItem value="Educational">Educational</SelectItem>
-              <SelectItem value="Electronic">Electronic</SelectItem>
-              <SelectItem value="Wooden">Wooden</SelectItem>
+              <SelectItem value="Soft Toy">Soft Toy</SelectItem>
+              <SelectItem value="Plastic Toy">Plastic Toy</SelectItem>
+              <SelectItem value="Baby Accessories">Baby Accessories</SelectItem>
               <SelectItem value="Others">Others</SelectItem>
             </SelectContent>
           </Select>
