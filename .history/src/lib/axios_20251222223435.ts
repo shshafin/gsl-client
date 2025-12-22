@@ -4,7 +4,7 @@ import { getCookie } from "cookies-next";
 // Create the instance
 const axiosInstance = axios.create({
   // baseURL: "http://localhost:5000/api/v1", // Your Backend Base URL
-  baseURL: "https://gsl-server-1lne.onrender.com/api/v1",
+  
   timeout: 10000, // 10 seconds timeout
   headers: {
     "Content-Type": "application/json",
