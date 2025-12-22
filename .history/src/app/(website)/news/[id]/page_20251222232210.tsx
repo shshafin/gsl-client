@@ -15,7 +15,6 @@ import {
   Share2,
 } from "lucide-react";
 import { getSingleBlog } from "@/services/BlogService";
-import { cn } from "@/lib/utils";
 
 export default function SingleBlogPage({
   params,
@@ -27,10 +26,12 @@ export default function SingleBlogPage({
   const [loading, setLoading] = useState(true);
   const [currentUrl, setCurrentUrl] = useState("");
 
+  // Set the current URL for social sharing
   useEffect(() => {
     setCurrentUrl(window.location.href);
   }, []);
 
+  // --- SCROLL & PROGRESS LOGIC ---
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -49,21 +50,25 @@ export default function SingleBlogPage({
         setLoading(false);
       }
     };
+
     if (id) fetchBlog();
   }, [id]);
 
+  // --- DYNAMIC READING TIME LOGIC ---
   const totalReadingTime = useMemo(() => {
     if (!blog?.content) return 0;
     const text = blog.content.replace(/<[^>]*>?/gm, "");
     return Math.ceil(text.split(/\s/g).length / 200);
   }, [blog]);
 
+  // This transforms scroll position (0 to 1) into minutes remaining
   const minutesRemaining = useTransform(
     scrollYProgress,
     [0, 1],
     [totalReadingTime, 0]
   );
 
+  // Convert MotionValue to a displayable integer
   const [displayMinutes, setDisplayMinutes] = useState(totalReadingTime);
   useEffect(() => {
     return minutesRemaining.on("change", (latest) => {
@@ -71,6 +76,7 @@ export default function SingleBlogPage({
     });
   }, [minutesRemaining]);
 
+  // --- SOCIAL SHARE HANDLERS ---
   const shareLinks = {
     facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
       currentUrl
@@ -96,13 +102,13 @@ export default function SingleBlogPage({
 
   return (
     <main className="bg-white min-h-screen pb-24">
-      {/* READING PROGRESS BAR */}
+      {/* --- READING PROGRESS BAR --- */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1.5 bg-brand-red origin-left z-50 shadow-sm"
         style={{ scaleX }}
       />
 
-      {/* DYNAMIC TIMER */}
+      {/* --- DYNAMIC TIMER FLOATING BADGE (New Feature) --- */}
       <motion.div
         initial={{ opacity: 0, x: 50 }}
         animate={{ opacity: 1, x: 0 }}
@@ -123,8 +129,8 @@ export default function SingleBlogPage({
         </div>
       </motion.div>
 
-      {/* HEADER SECTION */}
-      <div className="relative h-[60vh] md:h-[70vh] w-full">
+      {/* --- HEADER IMAGE SECTION --- */}
+      <div className="relative h-[70vh] w-full">
         <Image
           src={blog.coverImage}
           alt={blog.title}
@@ -133,13 +139,15 @@ export default function SingleBlogPage({
           priority
         />
         <div className="absolute inset-0 bg-linear-to-b from-black/70 via-black/40 to-white" />
+
         <div className="absolute inset-0 flex items-center justify-center px-4">
           <div className="max-w-4xl w-full text-center text-white">
             <Link
               href="/news"
-              className="inline-flex items-center gap-2 text-white/70 hover:text-white transition-all mb-8 font-medium">
+              className="inline-flex items-center gap-2 text-white/70 hover:text-white transition-all mb-8 font-medium hover:-translate-x-1">
               <ArrowLeft size={20} /> Back to News
             </Link>
+
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -151,96 +159,110 @@ export default function SingleBlogPage({
                 <Clock size={14} /> {totalReadingTime} MIN READ
               </span>
             </motion.div>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-black leading-tight mb-10 drop-shadow-2xl">
+
+            <h1 className="text-5xl md:text-7xl font-black leading-tight mb-10 drop-shadow-2xl">
               {blog.title}
             </h1>
+
             <div className="flex items-center justify-center gap-8 text-sm font-bold text-white/90">
-              <div className="flex items-center gap-2">
-                <User
-                  size={18}
-                  className="text-brand-red"
-                />
-                <span>{blog.author}</span>
+              <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm pr-6 rounded-full border border-white/10">
+                <div className="w-12 h-12 rounded-full bg-brand-red flex items-center justify-center border-2 border-white/20">
+                  <User size={20} />
+                </div>
+                <span>By {blog.author}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Calendar
                   size={18}
                   className="text-brand-red"
                 />
-                <span>{new Date(blog.createdAt).toLocaleDateString()}</span>
+                <span>
+                  {new Date(blog.createdAt).toLocaleDateString("en-US", {
+                    month: "long",
+                    day: "numeric",
+                    year: "numeric",
+                  })}
+                </span>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* ARTICLE CONTENT */}
+      {/* --- ARTICLE CONTENT --- */}
       <article className="max-w-4xl mx-auto px-4 -mt-32 relative z-10">
-        <div className="bg-white rounded-[2.5rem] md:rounded-[3rem] p-6 md:p-16 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.12)] border border-gray-50">
-          {/* Share Section */}
+        <div className="bg-white rounded-[3rem] p-8 md:p-16 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.12)] border border-gray-50">
+          {/* Social Share Section */}
           <div className="flex flex-col md:flex-row items-center justify-between border-b border-gray-100 pb-10 mb-12 gap-6">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-gray-400">
                 <Share2 size={20} />
               </div>
-              <span className="text-gray-900 font-black text-sm uppercase">
-                Share Story
+              <span className="text-gray-900 font-black text-sm uppercase tracking-wider">
+                Share with your network
               </span>
             </div>
+
             <div className="flex gap-4">
-              {[
-                { icon: Facebook, color: "#1877F2", link: shareLinks.facebook },
-                { icon: Twitter, color: "#1DA1F2", link: shareLinks.twitter },
-                { icon: Linkedin, color: "#0A66C2", link: shareLinks.linkedin },
-              ].map((social, i) => (
-                <a
-                  key={i}
-                  href={social.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-12 h-12 rounded-2xl flex items-center justify-center transition-all hover:-translate-y-1 shadow-sm"
-                  style={{
-                    backgroundColor: `${social.color}15`,
-                    color: social.color,
-                  }}>
-                  <social.icon
-                    size={22}
-                    fill="currentColor"
-                  />
-                </a>
-              ))}
+              <a
+                href={shareLinks.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-12 h-12 rounded-2xl bg-[#1877F2]/10 text-[#1877F2] flex items-center justify-center hover:bg-[#1877F2] hover:text-white transition-all hover:-translate-y-1 shadow-sm">
+                <Facebook
+                  size={22}
+                  fill="currentColor"
+                />
+              </a>
+              <a
+                href={shareLinks.twitter}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-12 h-12 rounded-2xl bg-[#1DA1F2]/10 text-[#1DA1F2] flex items-center justify-center hover:bg-[#1DA1F2] hover:text-white transition-all hover:-translate-y-1 shadow-sm">
+                <Twitter
+                  size={22}
+                  fill="currentColor"
+                />
+              </a>
+              <a
+                href={shareLinks.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-12 h-12 rounded-2xl bg-[#0A66C2]/10 text-[#0A66C2] flex items-center justify-center hover:bg-[#0A66C2] hover:text-white transition-all hover:-translate-y-1 shadow-sm">
+                <Linkedin
+                  size={22}
+                  fill="currentColor"
+                />
+              </a>
             </div>
           </div>
 
-          {/* HTML CONTENT RENDERER - FIXED FOR OVERFLOW */}
+          {/* HTML CONTENT RENDERER */}
           <div
-            className={cn(
-              "prose prose-lg md:prose-xl lg:prose-2xl max-w-none text-gray-700",
-              "wrap-break-word overflow-hidden [word-break:break-word] [hyphens:auto]", // Key fix for overflow
-              "prose-headings:font-black prose-headings:text-gray-900 prose-headings:tracking-tight",
-              "prose-p:leading-relaxed prose-p:mb-6",
-              "prose-img:rounded-3xl prose-img:shadow-lg prose-img:mx-auto",
-              "prose-a:text-brand-red prose-a:no-underline hover:prose-a:underline",
-              "prose-blockquote:border-l-4 prose-blockquote:border-brand-red prose-blockquote:bg-gray-50 prose-blockquote:px-6 prose-blockquote:py-2 prose-blockquote:rounded-r-2xl",
-              "prose-ol:list-decimal prose-ul:list-disc prose-li:marker:text-brand-red prose-li:my-1" // Fix for lists
-            )}
+            className="prose prose-lg md:prose-2xl max-w-none text-gray-700 
+            prose-headings:font-black prose-headings:text-gray-900 
+            prose-p:leading-relaxed prose-p:mb-8
+            prose-a:text-brand-red prose-a:font-bold prose-a:no-underline hover:prose-a:underline
+            prose-img:rounded-[2rem] prose-img:shadow-2xl prose-img:my-16
+            prose-blockquote:border-l-brand-red prose-blockquote:bg-gray-50 prose-blockquote:py-2 prose-blockquote:px-8 prose-blockquote:rounded-r-2xl prose-blockquote:italic"
             dangerouslySetInnerHTML={{ __html: blog.content }}
           />
 
-          {/* Footer Tags */}
+          {/* Tags / Footer */}
           <div className="mt-20 pt-10 border-t border-gray-100 flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="flex items-center gap-4">
-              <p className="text-gray-400 font-bold text-xs uppercase tracking-widest">
+              <p className="text-gray-400 font-bold text-sm uppercase">
                 Category
               </p>
-              <span className="bg-gray-900 text-white px-6 py-2 rounded-full text-xs font-bold uppercase tracking-tighter">
+              <span className="bg-gray-900 text-white px-5 py-2 rounded-full text-xs font-bold tracking-widest">
                 {blog.category}
               </span>
             </div>
+
             <Link
               href="/news"
               className="group flex items-center gap-3 text-brand-red font-black text-lg hover:gap-5 transition-all">
-              Explore More Articles{" "}
+              Explore More Articles
               <ArrowLeft
                 className="rotate-180"
                 size={24}

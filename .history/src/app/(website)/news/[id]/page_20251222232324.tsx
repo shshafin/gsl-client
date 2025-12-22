@@ -216,7 +216,7 @@ export default function SingleBlogPage({
           <div
             className={cn(
               "prose prose-lg md:prose-xl lg:prose-2xl max-w-none text-gray-700",
-              "wrap-break-word overflow-hidden [word-break:break-word] [hyphens:auto]", // Key fix for overflow
+              "break-words overflow-hidden [word-break:break-word] [hyphens:auto]", // Key fix for overflow
               "prose-headings:font-black prose-headings:text-gray-900 prose-headings:tracking-tight",
               "prose-p:leading-relaxed prose-p:mb-6",
               "prose-img:rounded-3xl prose-img:shadow-lg prose-img:mx-auto",

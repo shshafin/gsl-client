@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import { useRouter } from "next/navigation";
@@ -19,11 +18,11 @@ import GSLSingleImageUpload from "@/components/core/GSLForm/GSLSingleImageUpload
 import { createBlog } from "@/services/BlogService";
 import { TBlogCategory } from "@/types/blog.types";
 
-// ✅ Updated to react-quill-new CSS path
-import "react-quill-new/dist/quill.snow.css";
+// Import Quill CSS
+import "react-quill/dist/quill.snow.css";
 
-// ✅ Updated to react-quill-new Dynamic Import
-const ReactQuill = dynamic(() => import("react-quill-new"), {
+// Dynamic Import for the Editor
+const ReactQuill = dynamic(() => import("react-quill"), {
   ssr: false,
   loading: () => (
     <div className="h-64 bg-gray-50 animate-pulse border rounded-lg flex items-center justify-center text-gray-400">
@@ -39,6 +38,7 @@ const categoryOptions: { label: string; value: TBlogCategory }[] = [
   { label: "Stories", value: "Stories" },
 ];
 
+// Professional Toolbar Configuration
 const quillModules = {
   toolbar: [
     [{ header: [1, 2, 3, false] }],
@@ -80,7 +80,7 @@ export default function CreateBlogPage() {
       const formData = new FormData();
       const blogData = {
         title: values.title,
-        content: values.content,
+        content: values.content, // Raw HTML from Quill
         category: values.category,
         author: values.author,
         isPublished: true,
@@ -154,6 +154,7 @@ export default function CreateBlogPage() {
               <label className="text-sm font-bold text-gray-700 uppercase tracking-widest">
                 Blog Content
               </label>
+              {/* Using Controller for clean integration with React Quill */}
               <Controller
                 name="content"
                 control={form.control}
