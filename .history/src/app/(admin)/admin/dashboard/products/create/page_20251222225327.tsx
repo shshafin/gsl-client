@@ -163,6 +163,7 @@ export default function CreateProductPage() {
             <GSLImageUpload
               name="images"
               label="Product Images (Required)"
+              required // Adds a visual asterisk if your component supports it
             />
 
             <div className="flex justify-end gap-4">

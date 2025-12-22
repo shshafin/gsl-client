@@ -163,6 +163,7 @@ export default function CreateProductPage() {
             <GSLImageUpload
               name="images"
               label="Product Images (Required)"
+              
             />
 
             <div className="flex justify-end gap-4">
