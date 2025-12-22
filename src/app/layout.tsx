@@ -29,8 +29,6 @@ export default function RootLayout({
     <html
       lang="en"
       className="scroll-smooth">
-      {" "}
-      {/* 👈 Added smooth scrolling */}
       <body
         className={`${outfit.variable} antialiased bg-brand-light text-brand-dark`}>
         {children}
