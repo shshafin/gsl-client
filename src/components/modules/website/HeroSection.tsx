@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowRight, Globe, ShieldCheck, Award } from "lucide-react";
+import { ArrowRight, Globe, ShieldCheck } from "lucide-react";
 import PoshButton from "@/components/ui/PoshButton";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 
@@ -44,7 +44,7 @@ const HeroSection = () => {
             {/* HEADLINE */}
             <h1 className="text-5xl md:text-7xl font-bold leading-tight">
               <span className="block text-white">GSL EXPORT</span>
-              <span className="text-transparent bg-clip-text bg-linear-to-r from-brand-yellow to-yellow-600">
+              <span className="text-transparent bg-clip-text bg-brand-yellow">
                 LIMITED
               </span>
             </h1>
@@ -99,10 +99,7 @@ const HeroSection = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="flex justify-center relative mt-10 lg:mt-0">
-            {/* UPDATED SIZE:
-                Mobile: w-[240px] h-[240px] (Smaller)
-                Desktop: w-[450px] h-[450px] (Big & Premium)
-            */}
+            {/* UPDATED CONTAINER SIZE */}
             <div className="relative w-60 h-60 md:w-112.5 md:h-112.5">
               {/* 1. THE RED BACK LAYER */}
               <motion.div
@@ -129,7 +126,7 @@ const HeroSection = () => {
                 className="absolute inset-0 z-10 bg-white/10 backdrop-blur-md border border-white/20 p-6 md:p-8 rounded-3xl shadow-2xl flex flex-col items-center justify-center">
                 <div className="relative w-full h-full">
                   <Image
-                    src="/gsl-logo.webp"
+                    src="/hero.png"
                     alt="GSL Export Limited"
                     fill
                     className="object-contain drop-shadow-2xl"
@@ -138,7 +135,7 @@ const HeroSection = () => {
                 </div>
               </motion.div>
 
-              {/* Floating Badge */}
+              {/* 3. REPLACED FLOATING BADGE (Now using /export.png) */}
               <motion.div
                 animate={{ y: [0, 15, 0] }}
                 transition={{
@@ -147,9 +144,16 @@ const HeroSection = () => {
                   ease: "easeInOut",
                   delay: 1,
                 }}
-                className="absolute -top-4 -right-4 md:-top-6 md:-right-6 z-20 bg-brand-yellow text-brand-dark p-3 md:p-4 rounded-xl shadow-lg border border-white/50">
-                <Award className="h-6 w-6 md:h-8 md:w-8 mb-1 text-brand-red" />
-                <p className="font-bold text-xs md:text-sm">Best Exporter</p>
+                /* Removed bg-brand-yellow and padding to let the image shine */
+                className="absolute -top-6 -right-6 md:-top-10 md:-right-10 z-20 w-24 h-24 md:w-40 md:h-40">
+                <div className="relative w-full h-full">
+                  <Image
+                    src="/export.png"
+                    alt="Export Quality Seal"
+                    fill
+                    className="object-contain drop-shadow-xl"
+                  />
+                </div>
               </motion.div>
             </div>
           </motion.div>

@@ -77,25 +77,25 @@ const Navbar = () => {
       {/* --- 1. TOP BAR (Hidden on Mobile/Tablet) --- */}
       <div
         className={cn(
-          "hidden xl:flex w-full h-10 bg-linear-to-r from-brand-red to-red-900 text-white text-[11px] items-center justify-between px-8 z-51 relative transition-all duration-300",
+          "hidden xl:flex w-full h-10 bg-linear-to-r bg-[#bedae5] text-black text-[11px] items-center justify-between px-8 z-51 relative transition-all duration-300",
           isScrolled && "opacity-0 -translate-y-10 pointer-events-none"
         )}>
         <div className="flex items-center gap-6">
           <a
             href={`mailto:${siteInfo.email}`}
-            className="flex items-center gap-2 hover:text-brand-yellow transition-colors">
+            className="flex items-center gap-2 hover:text-brand-red transition-colors">
             <Mail
               size={12}
-              className="text-brand-yellow"
+              className="text-brand-red"
             />
             <span>{siteInfo.email}</span>
           </a>
           <a
             href={`tel:${siteInfo.phone}`}
-            className="flex items-center gap-2 hover:text-brand-yellow transition-colors">
+            className="flex items-center gap-2 hover:text-brand-red transition-colors">
             <Phone
               size={12}
-              className="text-brand-yellow"
+              className="text-brand-red"
             />
             <span>{siteInfo.phone}</span>
           </a>
@@ -103,7 +103,7 @@ const Navbar = () => {
         <div className="flex items-center gap-2">
           <MapPin
             size={12}
-            className="text-brand-yellow"
+            className="text-brand-red"
           />
           <span>{siteInfo.address}</span>
         </div>
@@ -166,7 +166,7 @@ const Navbar = () => {
           {/* ACTIONS (Desktop Only) */}
           <div className="hidden xl:flex items-center shrink-0">
             <Link href="/contact">
-              <PoshButton className="shadow-lg h-11 px-6 text-[11px] font-black uppercase tracking-widest bg-linear-to-r from-brand-red to-red-800 text-white hover:shadow-red-500/20 active:scale-95">
+              <PoshButton className="shadow-lg h-11 px-6 text-[11px] font-black uppercase tracking-widest hover:bg-brand-yellow bg-brand-red text-white hover:shadow-red-500/20 active:scale-95">
                 Get Quote
               </PoshButton>
             </Link>
@@ -279,7 +279,7 @@ const Navbar = () => {
                   href="/contact"
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="block">
-                  <button className="w-full py-4 bg-linear-to-r from-brand-red to-red-800 text-white rounded-xl font-black uppercase tracking-widest text-sm shadow-xl shadow-red-900/10 active:scale-[0.98] transition-all">
+                  <button className="w-full py-4 bg-brand-red text-white rounded-xl font-black uppercase tracking-widest text-sm shadow-xl shadow-red-900/10 active:scale-[0.98] transition-all">
                     Get A Quote
                   </button>
                 </Link>

@@ -47,7 +47,7 @@ const Footer = () => {
   ].filter((social) => social.link);
 
   return (
-    <footer className="bg-neutral-950 text-white border-t border-white/10 pt-20 pb-10">
+    <footer className="bg-[#130e41] text-white border-t border-white/10 pt-20 pb-10">
       <div className="max-w-7xl mx-auto px-4">
         {/* Changed to 3 columns for a cleaner look since Support is removed */}
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-16 mb-16">
