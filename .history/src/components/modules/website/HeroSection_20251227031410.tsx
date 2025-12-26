@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowRight, Globe, ShieldCheck } from "lucide-react";
+import { ArrowRight, Globe, ShieldCheck } from "lucide-center";
 import PoshButton from "@/components/ui/PoshButton";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 

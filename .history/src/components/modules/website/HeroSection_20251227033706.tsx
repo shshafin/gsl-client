@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowRight, Globe, ShieldCheck } from "lucide-react";
+import { ArrowRight, Globe, ShieldCheck } from "lucide-center";
 import PoshButton from "@/components/ui/PoshButton";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 
@@ -13,7 +13,7 @@ const HeroSection = () => {
       {/* --- 1. BACKGROUND IMAGE & OVERLAYS --- */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/hero-bg.jpg"
+          src="/hero-bg.jpg" 
           alt="GSL Factory"
           fill
           className="object-cover opacity-25" // Lowered opacity for better text contrast
@@ -26,12 +26,14 @@ const HeroSection = () => {
 
       <SectionWrapper className="relative z-10 w-full pt-20 pb-20">
         <div className="flex flex-col items-center justify-center text-center">
+          
           {/* --- CONTENT BLOCK --- */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="space-y-10 text-white max-w-4xl">
+            className="space-y-10 text-white max-w-4xl"
+          >
             {/* 1. TOP BADGE */}
             <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-brand-yellow/10 border border-brand-yellow/20 backdrop-blur-md">
               <span className="relative flex h-2.5 w-2.5">
@@ -68,7 +70,8 @@ const HeroSection = () => {
               <Link href="/contact">
                 <PoshButton
                   variant="outline"
-                  className="h-16 px-10 text-lg border-brand-yellow text-brand-yellow hover:bg-brand-yellow hover:text-brand-dark transition-all duration-500">
+                  className="h-16 px-10 text-lg border-brand-yellow text-brand-yellow hover:bg-brand-yellow hover:text-brand-dark transition-all duration-500"
+                >
                   Request a Quote <ArrowRight className="ml-2 h-5 w-5" />
                 </PoshButton>
               </Link>
@@ -79,21 +82,17 @@ const HeroSection = () => {
               <div className="flex items-center gap-4 group">
                 <Globe className="text-brand-yellow h-10 w-10 transition-transform group-hover:rotate-12" />
                 <div className="text-left">
-                  <p className="font-black text-2xl md:text-3xl leading-none">
-                    6+
-                  </p>
+                  <p className="font-black text-2xl md:text-3xl leading-none">6+</p>
                   <p className="text-[10px] text-gray-400 uppercase tracking-widest mt-1.5">
                     Countries Served
                   </p>
                 </div>
               </div>
-
+              
               <div className="flex items-center gap-4 group">
                 <ShieldCheck className="text-brand-yellow h-10 w-10 transition-transform group-hover:scale-110" />
                 <div className="text-left">
-                  <p className="font-black text-2xl md:text-3xl leading-none">
-                    BSCI
-                  </p>
+                  <p className="font-black text-2xl md:text-3xl leading-none">BSCI</p>
                   <p className="text-[10px] text-gray-400 uppercase tracking-widest mt-1.5">
                     Certified Quality
                   </p>
