@@ -137,11 +137,11 @@ const DepartmentsSection = () => {
   // 🌀 STATE: Tracks which card is currently "Active" in the loop
   const [activeIndex, setActiveIndex] = useState(0);
 
-  // 🌀 EFFECT: Move the highlight every 2 seconds
+  // 🌀 EFFECT: Move the highlight every 8 seconds (much slower)
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % departments.length);
-    }, 2000); // Speed of the loop
+    }, 8000); // Speed of the loop - increased to 8000ms (8 seconds per card)
     return () => clearInterval(interval);
   }, []);
 
@@ -180,7 +180,7 @@ const DepartmentsSection = () => {
               {/* CARD VISUAL */}
               <div
                 className={cn(
-                  "relative h-full p-8 rounded-2xl transition-all duration-700 border overflow-hidden",
+                  "relative h-full p-8 rounded-2xl transition-all duration-800 border overflow-hidden",
                   // 🎨 DYNAMIC STYLES based on Active State
                   isActive
                     ? "bg-linear-to-br from-brand-yellow/20 to-brand-red/40 border-brand-yellow/50 shadow-[0_0_40px_rgba(255,215,0,0.3)] scale-105 z-10"
@@ -189,7 +189,7 @@ const DepartmentsSection = () => {
                 {/* 1. FLASH EFFECT (Travels across card when active) */}
                 <div
                   className={cn(
-                    "absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent skew-x-12 transition-transform duration-1000",
+                    "absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent skew-x-12 transition-transform duration-2000",
                     isActive ? "translate-x-full" : "-translate-x-full"
                   )}
                 />
@@ -241,9 +241,14 @@ const DepartmentsSection = () => {
                 <div className="absolute bottom-0 left-0 w-full h-1 bg-white/10">
                   <div
                     className={cn(
-                      "h-full bg-brand-yellow transition-all duration-2000 ease-linear",
+                      "h-full bg-brand-yellow ease-linear",
                       isActive ? "w-full" : "w-0"
                     )}
+                    style={{
+                      transition: isActive
+                        ? "width 8000ms linear"
+                        : "width 0ms",
+                    }}
                   />
                 </div>
               </div>
