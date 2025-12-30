@@ -60,7 +60,7 @@ const FeaturedCollections = () => {
         </TiltCard>
 
         <div className="md:col-span-1 lg:col-span-2 flex flex-col gap-6 h-full">
-          {/* 2. PET TOY */}
+          {/* 2. PLASTIC TOY */}
           <TiltCard
             href="/products?category=Pet Toy"
             className="h-75 lg:flex-1">

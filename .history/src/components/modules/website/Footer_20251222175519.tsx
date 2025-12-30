@@ -85,7 +85,7 @@ const Footer = () => {
             <ul className="space-y-4">
               {[
                 "Soft Toys",
-                "Plastic Figures",
+                "Pet Toys",
                 "Custom Manufacturing",
                 "Quality Policy",
                 "Contact Support",

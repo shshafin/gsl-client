@@ -19,7 +19,13 @@ import SectionWrapper from "@/components/ui/SectionWrapper";
 import { getAllProducts } from "@/services/ProductService";
 import { cn } from "@/lib/utils";
 
-const CATEGORIES = ["All", "Soft Toy", "Pet Toy", "Baby Accessories", "Others"];
+const CATEGORIES = [
+  "All",
+  "Soft Toy",
+  "Pet Toy",
+  "Baby Accessories",
+  "Others",
+];
 
 const CATEGORY_COLORS: Record<string, string> = {
   "Soft Toy": "bg-rose-100 text-rose-600 border border-rose-200",

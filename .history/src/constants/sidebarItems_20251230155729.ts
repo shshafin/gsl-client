@@ -2,7 +2,7 @@ import {
   LayoutDashboard,
   Package,
   Newspaper,
-  // Users,
+  Users,
   Settings,
   HelpCircle,
   FileText,

@@ -340,7 +340,7 @@ export default function ProductListPage() {
             <SelectContent>
               <SelectItem value="all">All Categories</SelectItem>
               <SelectItem value="Soft Toy">Soft Toy</SelectItem>
-              <SelectItem value="Pet Toy">Pet Toy</SelectItem>
+              <SelectItem value="Plastic Toy">Plastic Toy</SelectItem>
               <SelectItem value="Baby Accessories">Baby Accessories</SelectItem>
               <SelectItem value="Others">Others</SelectItem>
             </SelectContent>

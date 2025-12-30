@@ -60,7 +60,7 @@ const FeaturedCollections = () => {
         </TiltCard>
 
         <div className="md:col-span-1 lg:col-span-2 flex flex-col gap-6 h-full">
-          {/* 2. PET TOY */}
+          {/* 2. PLASTIC TOY */}
           <TiltCard
             href="/products?category=Pet Toy"
             className="h-75 lg:flex-1">
@@ -76,7 +76,7 @@ const FeaturedCollections = () => {
                 <div className="flex justify-between items-end">
                   <div>
                     <h3 className="text-3xl font-bold text-white mb-1 shadow-sm">
-                      Pet Toy
+                      Plastic Toy
                     </h3>
                     <p className="text-white/90 text-sm">
                       Durable, safe, and fun.

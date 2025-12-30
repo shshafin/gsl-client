@@ -1,7 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import {
   motion,
   useScroll,
@@ -635,10 +637,10 @@ export default function AboutPage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-100 flex items-center justify-center bg-black/95 backdrop-blur-xl p-4 md:p-10">
+              className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-xl p-4 md:p-10">
               <button
                 onClick={() => setActiveGallery(null)}
-                className="absolute top-8 right-8 text-white/50 hover:text-white z-110 transition-colors">
+                className="absolute top-8 right-8 text-white/50 hover:text-white z-[110] transition-colors">
                 <X
                   size={40}
                   strokeWidth={1}
@@ -653,7 +655,7 @@ export default function AboutPage() {
                       : prev - 1
                   )
                 }
-                className="hidden md:block absolute left-4 md:left-10 text-white/30 hover:text-white z-110 transition-all">
+                className="hidden md:block absolute left-4 md:left-10 text-white/30 hover:text-white z-[110] transition-all">
                 <ChevronLeft
                   size={60}
                   strokeWidth={1}
@@ -667,7 +669,7 @@ export default function AboutPage() {
                       departmentGallery[activeGallery].images.length
                   )
                 }
-                className="hidden md:block absolute right-4 md:right-10 text-white/30 hover:text-white z-110 transition-all">
+                className="hidden md:block absolute right-4 md:right-10 text-white/30 hover:text-white z-[110] transition-all">
                 <ChevronRight
                   size={60}
                   strokeWidth={1}
