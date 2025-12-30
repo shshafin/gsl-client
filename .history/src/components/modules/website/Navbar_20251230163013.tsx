@@ -83,7 +83,7 @@ const Navbar = () => {
         <div className="flex items-center gap-6">
           <a
             href={`mailto:${siteInfo.email}`}
-            className="flex items-center font-bold text-sm gap-2 hover:text-brand-red transition-colors">
+            className="flex items-center  gap-2 hover:text-brand-red transition-colors">
             <Mail
               size={12}
               className="text-brand-red"
@@ -92,7 +92,7 @@ const Navbar = () => {
           </a>
           <a
             href={`tel:${siteInfo.phone}`}
-            className="flex items-center font-bold text-sm gap-2 hover:text-brand-red transition-colors">
+            className="flex items-center  gap-2 hover:text-brand-red transition-colors">
             <Phone
               size={12}
               className="text-brand-red"
@@ -100,7 +100,7 @@ const Navbar = () => {
             <span>{siteInfo.phone}</span>
           </a>
         </div>
-        <div className="flex text-sm font-bold items-center gap-2">
+        <div className="flex items-center gap-2">
           <MapPin
             size={12}
             className="text-brand-red"
