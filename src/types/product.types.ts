@@ -1,6 +1,6 @@
 export type TProductCategory =
   | "Soft Toy"
-  | "Plastic Toy"
+  | "Pet Toy"
   | "Baby Accessories"
   | "Others";
 

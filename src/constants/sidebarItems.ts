@@ -2,7 +2,7 @@ import {
   LayoutDashboard,
   Package,
   Newspaper,
-  Users,
+  // Users,
   Settings,
   HelpCircle,
   FileText,
@@ -31,11 +31,11 @@ export const sidebarItems = [
     path: "/admin/dashboard/blogs",
     icon: Newspaper,
   },
-  {
-    title: "Team Members",
-    path: "/admin/dashboard/team",
-    icon: Users,
-  },
+  // {
+  //   title: "Team Members",
+  //   path: "/admin/dashboard/team",
+  //   icon: Users,
+  // },
   {
     title: "Messages",
     path: "/admin/dashboard/messages",

@@ -74,7 +74,7 @@ export default function ProductListPage() {
     switch (cat) {
       case "Soft Toy":
         return "bg-pink-100 text-pink-800 border-pink-200";
-      case "Plastic Toy":
+      case "Pet Toy":
         return "bg-blue-100 text-blue-800 border-blue-200";
       case "Baby Accessories":
         return "bg-green-100 text-green-800 border-green-200";
@@ -340,7 +340,7 @@ export default function ProductListPage() {
             <SelectContent>
               <SelectItem value="all">All Categories</SelectItem>
               <SelectItem value="Soft Toy">Soft Toy</SelectItem>
-              <SelectItem value="Plastic Toy">Plastic Toy</SelectItem>
+              <SelectItem value="Pet Toy">Pet Toy</SelectItem>
               <SelectItem value="Baby Accessories">Baby Accessories</SelectItem>
               <SelectItem value="Others">Others</SelectItem>
             </SelectContent>

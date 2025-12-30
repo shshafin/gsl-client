@@ -37,7 +37,7 @@ const formSchema = z.object({
 
 const categories = [
   { value: "Soft Toy", label: "Soft Toy" },
-  { value: "Plastic Toy", label: "Plastic Toy" },
+  { value: "Pet Toy", label: "Pet Toy" },
   { value: "Baby Accessories", label: "Baby Accessories" },
   { value: "Others", label: "Others" },
 ];
