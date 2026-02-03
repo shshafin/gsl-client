@@ -76,7 +76,7 @@ const FeaturedCollections = () => {
                 <div className="flex justify-between items-end">
                   <div>
                     <h3 className="text-3xl font-bold text-white mb-1 shadow-sm">
-                      Pet Toy
+                      Flat Toy
                     </h3>
                     <p className="text-white/90 text-sm">
                       Durable, safe, and fun.

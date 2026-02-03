@@ -78,7 +78,7 @@ const Navbar = () => {
       <div
         className={cn(
           "hidden xl:flex w-full h-10 bg-linear-to-r bg-[#bedae5] text-black text-[11px] items-center justify-between px-8 z-51 relative transition-all duration-300",
-          isScrolled && "opacity-0 -translate-y-10 pointer-events-none"
+          isScrolled && "opacity-0 -translate-y-10 pointer-events-none",
         )}>
         <div className="flex items-center gap-6">
           <a
@@ -118,7 +118,7 @@ const Navbar = () => {
           "fixed z-50 w-full transition-all duration-500 flex items-center",
           isScrolled
             ? "bg-white/95 backdrop-blur-md shadow-xl top-0 h-16 md:h-20 border-b border-gray-100"
-            : "top-0 xl:top-8 h-20 md:h-24"
+            : "top-0 xl:top-8 h-20 md:h-24",
         )}>
         <div className="container mx-auto flex items-center justify-between px-4 lg:px-8">
           {/* LOGO */}
@@ -130,7 +130,7 @@ const Navbar = () => {
                 "relative transition-all duration-500",
                 isScrolled
                   ? "h-8 w-24 md:h-10 md:w-32"
-                  : "h-10 w-28 md:h-12 md:w-36 xl:h-16 xl:w-48"
+                  : "h-10 w-28 md:h-12 md:w-36 xl:h-16 xl:w-48",
               )}>
               <Image
                 src={siteInfo.logo}
@@ -154,7 +154,7 @@ const Navbar = () => {
                     "text-[14px] font-bold tracking-tight uppercase transition-colors duration-300",
                     isScrolled
                       ? "text-gray-800"
-                      : "text-gray-900 group-hover:text-brand-red"
+                      : "text-gray-900 group-hover:text-brand-red",
                   )}>
                   {link.name}
                 </span>

@@ -26,18 +26,19 @@ const formSchema = z.object({
   description: z.string().optional(),
   price: z.string().optional(),
   isFeatured: z.boolean().default(false),
-  // images is now the only required field
+  // images remains the only required field
   images: z
     .any()
     .refine(
       (files) => files && files.length > 0,
-      "At least one image is required"
+      "At least one image is required",
     ),
 });
 
+// 🏷️ Category Mapping: User sees "Flat Toy", DB gets "Pet Toy"
 const categories = [
   { value: "Soft Toy", label: "Soft Toy" },
-  { value: "Pet Toy", label: "Pet Toy" },
+  { value: "Pet Toy", label: "Flat Toy" },
   { value: "Baby Accessories", label: "Baby Accessories" },
   { value: "Others", label: "Others" },
 ];
@@ -63,19 +64,19 @@ export default function CreateProductPage() {
     try {
       const formData = new FormData();
 
-      // 1. Prepare product data, handling optional number conversion
+      // 1. Prepare product data
       const productData = {
-        name: values.name || "Untitled Product", // Optional fallback
+        name: values.name || "Untitled Product",
         category: values.category || "Others",
         description: values.description || "",
-        price: values.price ? Number(values.price) : 0, // Avoid NaN if empty
+        price: values.price ? Number(values.price) : 0,
         isFeatured: values.isFeatured,
       };
 
       // 2. Append JSON as 'data'
       formData.append("data", JSON.stringify(productData));
 
-      // 3. Append Images (Guaranteed to exist by Zod)
+      // 3. Append Images
       if (values.images && values.images.length > 0) {
         values.images.forEach((file: File) => {
           formData.append("images", file);
@@ -119,12 +120,12 @@ export default function CreateProductPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <GSLInput
                 name="name"
-                label="Product Name (Optional)"
+                label="Product Name" // "Optional" text removed for clean UI
                 placeholder="e.g. Teddy Bear"
               />
               <GSLSelect
                 name="category"
-                label="Category (Optional)"
+                label="Category"
                 options={categories}
               />
             </div>
@@ -132,14 +133,14 @@ export default function CreateProductPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <GSLInput
                 name="price"
-                label="Price (Optional)"
+                label="Price"
                 type="number"
                 placeholder="20.00"
               />
 
               <div className="flex flex-col gap-3 mt-2">
-                <label className="text-sm font-medium">Featured Product</label>
-                <div className="flex items-center gap-2 border p-3 rounded-md">
+                <label className="text-sm font-medium">Featured Status</label>
+                <div className="flex items-center gap-2 border p-3 rounded-md bg-gray-50/50">
                   <Checkbox
                     checked={form.watch("isFeatured")}
                     onCheckedChange={(val) =>
@@ -147,7 +148,7 @@ export default function CreateProductPage() {
                     }
                   />
                   <span className="text-sm text-gray-500">
-                    Show on Home Page Slider
+                    Show on Home Page
                   </span>
                 </div>
               </div>
@@ -155,17 +156,17 @@ export default function CreateProductPage() {
 
             <GSLTextarea
               name="description"
-              label="Description (Optional)"
+              label="Description"
               placeholder="Product details..."
             />
 
-            {/* Required Field */}
             <GSLImageUpload
               name="images"
-              label="Product Images (Required)"
+              label="Product Images"
+              // Only this one remains required as per logic
             />
 
-            <div className="flex justify-end gap-4">
+            <div className="flex justify-end gap-4 pt-4">
               <Button
                 type="button"
                 variant="outline"
@@ -174,7 +175,7 @@ export default function CreateProductPage() {
               </Button>
               <Button
                 type="submit"
-                className="bg-black">
+                className="bg-black hover:bg-gray-800 text-white px-8">
                 Create Product
               </Button>
             </div>
