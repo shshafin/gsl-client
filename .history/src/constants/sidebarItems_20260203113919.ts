@@ -5,7 +5,7 @@ import {
   // Users,
   Settings,
   HelpCircle,
-  // FileText,
+  FileText,
   Mail,
   UserCog, // 🆕 Import this icon
 } from "lucide-react";
