@@ -96,7 +96,7 @@ const Footer = () => {
                 { label: "Our Collection", path: "/products" },
                 { label: "About Our Story", path: "/about" },
                 { label: "News & Guides", path: "/news" },
-                { label: "Resources", path: "/resources" },
+                // { label: "Resources", path: "/resources" },
                 { label: "Contact Support", path: "/contact" },
               ].map((item) => (
                 <li key={item.label}>

@@ -59,7 +59,7 @@ const Navbar = () => {
     { name: "Our Collection", href: "/products" },
     { name: "Corporate Profile", href: "/about" },
     { name: "Media & Insights", href: "/news" },
-    { name: "Resources", href: "/resources" },
+    // { name: "Resources", href: "/resources" },
     { name: "Contact", href: "/contact" },
   ];
 

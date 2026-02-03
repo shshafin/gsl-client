@@ -5,7 +5,7 @@ import {
   // Users,
   Settings,
   HelpCircle,
-  FileText,
+  // FileText,
   Mail,
   UserCog, // 🆕 Import this icon
 } from "lucide-react";
@@ -41,11 +41,11 @@ export const sidebarItems = [
     path: "/admin/dashboard/messages",
     icon: Mail,
   },
-  {
-    title: "Resources (PDF)",
-    path: "/admin/dashboard/resources",
-    icon: FileText,
-  },
+  // {
+  //   title: "Resources (PDF)",
+  //   path: "/admin/dashboard/resources",
+  //   icon: FileText,
+  // },
   {
     title: "FAQ",
     path: "/admin/dashboard/faq",
