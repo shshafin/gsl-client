@@ -237,7 +237,7 @@ function ProductsContent() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-100 flex items-center justify-center bg-black/90 backdrop-blur-md p-4">
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-md p-4">
             <button
               onClick={() => setLightboxOpen(false)}
               className="absolute top-6 right-6 text-white/70 hover:text-white p-2">

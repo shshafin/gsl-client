@@ -54,7 +54,7 @@ const HeroSection = () => {
             {/* 3. SUBHEADLINE */}
             <p className="text-lg md:text-2xl text-gray-300 max-w-2xl mx-auto leading-relaxed font-light px-4">
               Bringing joy to the world through premium manufacturing. We are a
-              government-certified leader in soft toys, flat toys, and baby
+              government-certified leader in soft toys, toys, and baby
               accessories, exporting to 6+ countries.
             </p>
 

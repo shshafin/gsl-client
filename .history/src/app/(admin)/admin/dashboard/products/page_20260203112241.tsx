@@ -65,15 +65,10 @@ export default function ProductListPage() {
 
   // 📄 Pagination State
   const [page, setPage] = useState(1);
-  const [limit] = useState(10);
+  const [limit] = useState(10); // Change back to 10 for real use, or keep 1 for testing
 
   // 🆕 State to track if we have more data
   const [hasMore, setHasMore] = useState(true);
-
-  // Helper to get display name (Pet Toy -> Flat Toy)
-  const getCategoryDisplayName = (cat: string) => {
-    return cat === "Pet Toy" ? "Flat Toy" : cat;
-  };
 
   const getCategoryColor = (cat: TProductCategory) => {
     switch (cat) {
@@ -105,6 +100,11 @@ export default function ProductListPage() {
 
       if (res.success) {
         setProducts(res.data);
+
+        // 🧠 LOGIC FIX:
+        // If we received fewer items than the limit, we reached the end.
+        // Example: Limit 10, Received 4 -> No more pages.
+        // Example: Limit 10, Received 10 -> Probably more pages.
         if (res.data.length < limit) {
           setHasMore(false);
         } else {
@@ -173,8 +173,7 @@ export default function ProductListPage() {
         <Badge
           variant="outline"
           className={`border ${getCategoryColor(row.original.category)}`}>
-          {/* Mapping display name in table row */}
-          {getCategoryDisplayName(row.original.category)}
+          {row.original.category}
         </Badge>
       ),
     },
@@ -245,14 +244,13 @@ export default function ProductListPage() {
                     className={`w-fit mb-4 ${getCategoryColor(
                       row.original.category,
                     )}`}>
-                    {/* Mapping display name in view modal */}
-                    {getCategoryDisplayName(row.original.category)}
+                    {row.original.category}
                   </Badge>
                   <h2 className="text-3xl font-bold text-gray-900 mb-2">
                     {row.original.name}
                   </h2>
                   <p className="text-2xl font-mono text-gray-700 mb-6">
-                    ৳{row.original.price || "N/A"}
+                    ${row.original.price || "N/A"}
                   </p>
                   <p className="text-gray-600 leading-relaxed">
                     {row.original.description}
@@ -342,7 +340,6 @@ export default function ProductListPage() {
             <SelectContent>
               <SelectItem value="all">All Categories</SelectItem>
               <SelectItem value="Soft Toy">Soft Toy</SelectItem>
-              {/* Value "Pet Toy" but User sees "Flat Toy" */}
               <SelectItem value="Pet Toy">Flat Toy</SelectItem>
               <SelectItem value="Baby Accessories">Baby Accessories</SelectItem>
               <SelectItem value="Others">Others</SelectItem>
@@ -387,6 +384,7 @@ export default function ProductListPage() {
           Page <span className="font-bold">{page}</span>
         </p>
         <div className="flex gap-2">
+          {/* Previous Button */}
           <Button
             variant="outline"
             size="sm"
@@ -395,6 +393,8 @@ export default function ProductListPage() {
             <ChevronLeft className="h-4 w-4 mr-2" /> Previous
           </Button>
 
+          {/* Next Button */}
+          {/* Disabled if we know there's no more data */}
           <Button
             variant="outline"
             size="sm"

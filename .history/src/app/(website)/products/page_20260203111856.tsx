@@ -19,25 +19,11 @@ import SectionWrapper from "@/components/ui/SectionWrapper";
 import { getAllProducts } from "@/services/ProductService";
 import { cn } from "@/lib/utils";
 
-// 1. Logic for mapping Display Names to Database Values
-const CATEGORY_MAP: Record<string, string> = {
-  All: "All",
-  "Soft Toy": "Soft Toy",
-  "Flat Toy": "Pet Toy", // This maps UI "Flat Toy" to DB "Pet Toy"
-  "Baby Accessories": "Baby Accessories",
-  Others: "Others",
-};
-
-// Create a reverse map to display names correctly in the cards/UI
-const REVERSE_CATEGORY_MAP: Record<string, string> = Object.fromEntries(
-  Object.entries(CATEGORY_MAP).map(([key, value]) => [value, key]),
-);
-
-const DISPLAY_CATEGORIES = Object.keys(CATEGORY_MAP);
+const CATEGORIES = ["All", "Soft Toy", "Pet Toy", "Baby Accessories", "Others"];
 
 const CATEGORY_COLORS: Record<string, string> = {
   "Soft Toy": "bg-rose-100 text-rose-600 border border-rose-200",
-  "Pet Toy": "bg-blue-100 text-blue-600 border border-blue-200", // Keep DB value here for logic
+  "Flat Toy": "bg-blue-100 text-blue-600 border border-blue-200",
   "Baby Accessories": "bg-amber-100 text-amber-600 border border-amber-200",
   Others: "bg-gray-100 text-gray-600 border border-gray-200",
   Default: "bg-gray-100 text-gray-800 border border-gray-200",
@@ -60,13 +46,9 @@ function ProductsContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  // Reactive URL States (Get raw DB value from URL)
-  const categoryValueFromUrl = searchParams.get("category") || "All";
+  // Reactive URL States
+  const categoryFromUrl = searchParams.get("category") || "All";
   const searchFromUrl = searchParams.get("searchTerm") || "";
-
-  // Determine which UI button should be active
-  const activeDisplayCategory =
-    REVERSE_CATEGORY_MAP[categoryValueFromUrl] || "All";
 
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -76,6 +58,7 @@ function ProductsContent() {
 
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<any>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   // FETCH FUNCTION
   const fetchProducts = useCallback(async () => {
@@ -87,12 +70,9 @@ function ProductsContent() {
         sort: sortOption,
       };
 
+      // Apply URL filters to API Query
       if (searchFromUrl) query.searchTerm = searchFromUrl;
-
-      // Send the Database value (Pet Toy) to the API
-      if (categoryValueFromUrl !== "All") {
-        query.category = categoryValueFromUrl;
-      }
+      if (categoryFromUrl !== "All") query.category = categoryFromUrl;
 
       const response = await getAllProducts(query);
       setProducts(response.data || []);
@@ -102,22 +82,18 @@ function ProductsContent() {
     } finally {
       setLoading(false);
     }
-  }, [page, searchFromUrl, categoryValueFromUrl, sortOption]);
+  }, [page, searchFromUrl, categoryFromUrl, sortOption]);
 
+  // TRIGGER FETCH: When URL or Sort changes
   useEffect(() => {
     fetchProducts();
   }, [fetchProducts]);
 
-  const handleCategoryChange = (displayCat: string) => {
+  const handleCategoryChange = (cat: string) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set("page", "1");
-
-    // Convert UI selection (Flat Toy) back to DB value (Pet Toy)
-    const dbValue = CATEGORY_MAP[displayCat];
-
-    if (dbValue === "All") params.delete("category");
-    else params.set("category", dbValue);
-
+    if (cat === "All") params.delete("category");
+    else params.set("category", cat);
     router.push(`/products?${params.toString()}`);
   };
 
@@ -131,6 +107,7 @@ function ProductsContent() {
 
   const openLightbox = (product: any) => {
     setSelectedProduct(product);
+    setCurrentImageIndex(0);
     setLightboxOpen(true);
   };
 
@@ -163,13 +140,13 @@ function ProductsContent() {
             </div>
 
             <div className="flex flex-wrap justify-center gap-2">
-              {DISPLAY_CATEGORIES.map((cat) => (
+              {CATEGORIES.map((cat) => (
                 <button
                   key={cat}
                   onClick={() => handleCategoryChange(cat)}
                   className={cn(
                     "px-5 py-2.5 rounded-full text-sm font-bold transition-all duration-300",
-                    activeDisplayCategory === cat
+                    categoryFromUrl === cat
                       ? "bg-brand-red text-white shadow-lg scale-105"
                       : "bg-white text-gray-600 hover:bg-gray-100 border border-transparent hover:border-gray-200",
                   )}>
@@ -255,8 +232,7 @@ function ProductsContent() {
               <div className="mt-4 text-center text-white">
                 <h3 className="text-xl font-bold">{selectedProduct.name}</h3>
                 <p className="text-gray-400 text-sm">
-                  {REVERSE_CATEGORY_MAP[selectedProduct.category] ||
-                    selectedProduct.category}
+                  {selectedProduct.category}
                 </p>
               </div>
             </div>
@@ -282,7 +258,7 @@ const ProductCard = ({
     onClick={onClick}
     className="group relative aspect-square rounded-[2rem] overflow-hidden bg-gray-100 cursor-zoom-in shadow-sm hover:shadow-2xl transition-all duration-500 border border-transparent hover:border-gray-200">
     <Image
-      src={product.images?.[0] || "/placeholder-toy.jpg"}
+      src={product.images[0] || "/placeholder-toy.jpg"}
       alt={product.name || "Product"}
       fill
       className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -292,10 +268,10 @@ const ProductCard = ({
       <span
         className={cn(
           "inline-block rounded-full backdrop-blur-sm font-bold uppercase tracking-widest shadow-sm px-2 py-0.5 text-[8px] md:px-3 md:py-1 md:text-[10px]",
-          CATEGORY_COLORS[product.category] || CATEGORY_COLORS["Default"],
+          CATEGORY_COLORS[product.category as string] ||
+            CATEGORY_COLORS["Default"],
         )}>
-        {/* If category is Pet Toy, display Flat Toy */}
-        {REVERSE_CATEGORY_MAP[product.category] || product.category}
+        {product.category}
       </span>
     </div>
     {product.isFeatured && (

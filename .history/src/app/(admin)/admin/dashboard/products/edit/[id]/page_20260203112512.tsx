@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
-import { useEffect, useState, use } from "react";
+import { useEffect, useState, use } from "react"; // 👈 Import 'use'
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -20,29 +20,30 @@ import GSLImageUpload from "@/components/core/GSLForm/GSLImageUpload";
 import { getSingleProduct, updateProduct } from "@/services/ProductService";
 import { ArrowLeft } from "lucide-react";
 
-// 🛠️ Validation Schema: Removed strict requirements to avoid validation errors
+// Validation Schema
 const formSchema = z.object({
-  name: z.string().optional(),
-  category: z.string().optional(),
-  description: z.string().optional(),
+  name: z.string().min(1, "Name is required"),
+  category: z.string().min(1, "Category is required"),
+  description: z.string().min(1, "Description is required"),
   price: z.string().optional(),
   isFeatured: z.boolean().default(false),
   images: z.any().optional(),
 });
 
-// 🏷️ Category Mapping: Display "Flat Toy" instead of "Pet Toy"
 const categories = [
   { value: "Soft Toy", label: "Soft Toy" },
-  { value: "Pet Toy", label: "Flat Toy" }, // User sees Flat Toy
+  { value: "Pet Toy", label: "Pet Toy" },
   { value: "Baby Accessories", label: "Baby Accessories" },
   { value: "Others", label: "Others" },
 ];
 
+// 🛠️ FIX: Type definition is now a Promise
 export default function EditProductPage({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
+  // 🔓 UNWRAP: Use React.use() to unlock the params
   const { id } = use(params);
 
   const router = useRouter();
@@ -61,10 +62,11 @@ export default function EditProductPage({
     },
   });
 
+  // 1. Fetch Existing Data using the unwrapped 'id'
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await getSingleProduct(id);
+        const res = await getSingleProduct(id); // 👈 Use 'id' directly
         if (res.success) {
           const data = res.data;
           form.reset({
@@ -86,6 +88,7 @@ export default function EditProductPage({
     fetchProduct();
   }, [id, form]);
 
+  // 2. Handle Update
   const onSubmit = async (values: any) => {
     const toastId = toast.loading("Updating product...");
 
@@ -108,6 +111,7 @@ export default function EditProductPage({
         });
       }
 
+      // 👈 Use 'id' directly here
       const res = await updateProduct(id, formData);
 
       if (res.success) {
@@ -127,6 +131,7 @@ export default function EditProductPage({
 
   return (
     <div className="max-w-3xl mx-auto space-y-6">
+      {/* 🔙 Back Button */}
       <div>
         <Button
           variant="outline"
@@ -148,7 +153,7 @@ export default function EditProductPage({
               <GSLInput
                 name="name"
                 label="Product Name"
-                // ❌ Removed 'required' prop to hide red star
+                required
               />
               <GSLSelect
                 name="category"
@@ -164,10 +169,8 @@ export default function EditProductPage({
                 type="number"
               />
               <div className="flex flex-col gap-3 mt-2">
-                <label className="text-sm font-medium text-gray-700">
-                  Featured Status
-                </label>
-                <div className="flex items-center gap-2 border p-3 rounded-md bg-gray-50/50">
+                <label className="text-sm font-medium">Featured Status</label>
+                <div className="flex items-center gap-2 border p-3 rounded-md">
                   <Checkbox
                     checked={form.watch("isFeatured")}
                     onCheckedChange={(val) =>
@@ -188,15 +191,13 @@ export default function EditProductPage({
 
             {/* Existing Images */}
             {existingImages.length > 0 && (
-              <div className="space-y-3">
-                <label className="text-sm font-medium text-gray-700">
-                  Current Images
-                </label>
-                <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Current Images</label>
+                <div className="flex gap-3 overflow-x-auto pb-2">
                   {existingImages.map((img, idx) => (
                     <div
                       key={idx}
-                      className="relative h-20 w-20 rounded-lg overflow-hidden border-2 border-gray-100 shadow-sm">
+                      className="relative h-20 w-20 rounded-md overflow-hidden border">
                       <Image
                         src={img}
                         alt="Current"
@@ -206,18 +207,18 @@ export default function EditProductPage({
                     </div>
                   ))}
                 </div>
-                <p className="text-xs text-blue-500 italic">
-                  Note: New uploads will be added to the existing collection.
+                <p className="text-xs text-gray-500">
+                  New uploads will be added to this list.
                 </p>
               </div>
             )}
 
             <GSLImageUpload
               name="images"
-              label="Upload New Images"
+              label="Upload New Images (Appends to existing)"
             />
 
-            <div className="flex justify-end gap-4 pt-4">
+            <div className="flex justify-end gap-4">
               <Button
                 type="button"
                 variant="outline"
@@ -226,7 +227,7 @@ export default function EditProductPage({
               </Button>
               <Button
                 type="submit"
-                className="bg-black hover:bg-gray-800 text-white px-8">
+                className="bg-black">
                 Update Product
               </Button>
             </div>
