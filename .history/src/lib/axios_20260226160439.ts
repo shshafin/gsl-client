@@ -1,6 +1,7 @@
 import axios from "axios";
 import { getCookie } from "cookies-next";
 
+// Environment variable theke base URL nibe, na thakle default localhost dhorbe
 const baseURL =
   process.env.NEXT_PUBLIC_API_URL || "http://localhost:5007/api/v1";
 

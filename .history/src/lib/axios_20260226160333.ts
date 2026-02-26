@@ -4,6 +4,7 @@ import { getCookie } from "cookies-next";
 // Create the instance
 const axiosInstance = axios.create({
   baseURL: "http://localhost:5000/api/v1", // Your Backend Base URL
+  // baseURL: "https://gsl-server-1lne.onrender.com/api/v1",
   timeout: 10000, // 10 seconds timeout
   headers: {
     "Content-Type": "application/json",
@@ -24,7 +25,7 @@ axiosInstance.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error);
-  }
+  },
 );
 
 // 🔄 Response Interceptor: Global Error Handling (Optional but recommended)
@@ -36,7 +37,7 @@ axiosInstance.interceptors.response.use(
     // If the error is 401 (Unauthorized), it usually means the token expired.
     // You could force a logout here if you wanted.
     return Promise.reject(error);
-  }
+  },
 );
 
 export default axiosInstance;
