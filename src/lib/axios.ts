@@ -1,23 +1,22 @@
 import axios from "axios";
 import { getCookie } from "cookies-next";
 
-// Create the instance
+const baseURL =
+  process.env.NEXT_PUBLIC_API_URL || "http://localhost:5007/api/v1";
+
 const axiosInstance = axios.create({
-  // baseURL: "http://localhost:5000/api/v1", // Your Backend Base URL
-  baseURL: "https://gsl-server-1lne.onrender.com/api/v1",
-  timeout: 10000, // 10 seconds timeout
+  baseURL: baseURL,
+  timeout: 10000,
   headers: {
     "Content-Type": "application/json",
   },
-  withCredentials: true, // Important for cookies/sessions
+  withCredentials: true,
 });
 
-// 🛡️ Request Interceptor: Auto-attach Token
+// 🛡️ Request Interceptor
 axiosInstance.interceptors.request.use(
   (config) => {
-    // We get the token from the cookie named 'accessToken'
     const token = getCookie("accessToken");
-
     if (token) {
       config.headers.Authorization = `${token}`;
     }
@@ -25,19 +24,15 @@ axiosInstance.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error);
-  }
+  },
 );
 
-// 🔄 Response Interceptor: Global Error Handling (Optional but recommended)
+// 🔄 Response Interceptor
 axiosInstance.interceptors.response.use(
-  (response) => {
-    return response;
-  },
+  (response) => response,
   (error) => {
-    // If the error is 401 (Unauthorized), it usually means the token expired.
-    // You could force a logout here if you wanted.
     return Promise.reject(error);
-  }
+  },
 );
 
 export default axiosInstance;
