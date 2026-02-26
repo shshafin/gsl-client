@@ -62,8 +62,8 @@ const Footer = () => {
               />
             </div>
             <p className="text-gray-400 text-sm leading-relaxed max-w-sm">
-              {settings?.siteName || "GSL Export Ltd."} - Premium manufacturing
-              and global export solutions. Dedicated to safety, quality, and
+              {settings?.siteName || "GSL Export Ltd."} - Premium manufacturing and
+              global export solutions. Dedicated to safety, quality, and
               child-friendly engineering since day one.
             </p>
 
