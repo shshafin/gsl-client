@@ -166,7 +166,17 @@ const Footer = () => {
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-6">
           <p className="text-gray-500 text-xs tracking-wide">
             © {currentYear} {settings?.siteName || "KFT Toys"}. All rights
-            Reserved.
+            Reserved.{" "}
+            <span className="text-[12px] font-normal text-white/40">
+              Developed by{" "}
+              <a
+                href="https://shafinsadnan.com"
+                target="_blank"
+                rel="noopener"
+                className="font-normal no-underline hover:underline hover:text-white/50">
+                Shafin
+              </a>
+            </span>
           </p>
 
           <div className="flex items-center gap-2 text-gray-600 text-[10px] font-mono uppercase tracking-widest">
