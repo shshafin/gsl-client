@@ -1,0 +1,37 @@
+import axios from "axios";
+import { getCookie } from "cookies-next";
+
+const baseURL = "http://localhost:5000/api/v1";
+
+const axiosInstance = axios.create({
+  baseURL: baseURL,
+  timeout: 10000,
+  headers: {
+    "Content-Type": "application/json",
+  },
+  withCredentials: true,
+});
+
+// 🛡️ Request Interceptor
+axiosInstance.interceptors.request.use(
+  (config) => {
+    const token = getCookie("accessToken");
+    if (token) {
+      config.headers.Authorization = `${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  },
+);
+
+// 🔄 Response Interceptor
+axiosInstance.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    return Promise.reject(error);
+  },
+);
+
+export default axiosInstance;
