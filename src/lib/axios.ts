@@ -1,7 +1,8 @@
 import axios from "axios";
 import { getCookie } from "cookies-next";
 
-const baseURL = "http://localhost:5000/api/v1";
+const baseURL =
+  process.env.NEXT_PUBLIC_API_URL || "http://localhost:5007/api/v1";
 
 const axiosInstance = axios.create({
   baseURL: baseURL,
@@ -12,7 +13,7 @@ const axiosInstance = axios.create({
   withCredentials: true,
 });
 
-// 🛡️ Request Interceptor
+// ≡ƒ¢í∩╕Å Request Interceptor
 axiosInstance.interceptors.request.use(
   (config) => {
     const token = getCookie("accessToken");
@@ -26,7 +27,7 @@ axiosInstance.interceptors.request.use(
   },
 );
 
-// 🔄 Response Interceptor
+// ≡ƒöä Response Interceptor
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {

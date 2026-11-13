@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# GSL Client
 
-## Getting Started
+A modern frontend application built with Next.js, React, TypeScript, and Tailwind CSS for managing internal operations, user workflows, and structured dashboards.
 
-First, run the development server:
+## Overview
+
+This client focuses on a clean and scalable admin/product experience with:
+- responsive layouts
+- secure authenticated flows
+- rich form handling and validation
+- modern UI components and dashboards
+- mobile-ready architecture using Capacitor
+
+## Tech Stack
+
+- Next.js 16
+- React 19
+- TypeScript
+- Tailwind CSS
+- Radix UI
+- React Hook Form + Zod
+- Axios
+- Recharts
+- Framer Motion
+- Capacitor
+
+## Features
+
+- role-driven user experience
+- advanced table and data views
+- authentication and protected routes
+- file upload and rich content support
+- optimized responsive design
+- mobile app compatibility
+
+## Project Goals
+
+This project is designed to provide a polished, production-ready frontend layer for business and operational software workflows.
+
+## Run Locally
+
+```bash
+git clone https://github.com/shshafin/gsl-client.git
+cd gsl-client
+npm install
+npm run dev
+```
+
+Open http://localhost:3000
+
+## Scripts
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run build
+npm start
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Related
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Backend: https://github.com/shshafin/gsl-server
+- Portfolio: https://shafinsadnan.com
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Author
 
-## Learn More
+Shafin Sadnan
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+GitHub: https://github.com/shshafin
